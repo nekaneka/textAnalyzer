@@ -1,0 +1,45 @@
+.border-bottom {
+    border-bottom: 1px solid gray;
+}
+
+
+.text-analyze-wrapper {
+    min-height: 100%; 
+    padding: 20px;
+}
+
+.text-analyze-filter-header {
+    justify-content: center; 
+    padding: 10px;
+}
+
+.flex-column {
+    display: flex; 
+    flex-direction: column;
+}
+
+.toggle-filter {
+    display: flex; 
+    padding-bottom: 1rem; 
+    justify-content: center;
+}
+
+.no-data-text {
+    display: flex; 
+    padding-bottom: 1rem; 
+    padding-top: 1rem; 
+    justify-content: center;
+}
+
+.text-analyze-list, .text-analyze-filter-wrapper {
+    padding: 20px 40px; 
+    margin: 10px;
+}
+
+.close-button {
+    margin-right: 10px;
+}
+
+.analyze-button {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,60 @@
+<mat-card class="text-analyze-wrapper">
+    <mat-card-header class="text-analyze-filter-header">
+        <mat-card-title>Text Analyzer</mat-card-title>
+    </mat-card-header>
+    <mat-card class="text-analyze-filter-wrapper ">
+        <div class="flex-column">
+            <mat-form-field class="example-full-width">
+                <mat-label>Insert text to analyize</mat-label>
+                <textarea matInput [(ngModel)]="textToAnalyze"></textarea>
+                <button *ngIf="textToAnalyze" matSuffix mat-icon-button 
+                    aria-label="Clear" (click)="deleteTextToAnalyze()" class="close-button">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            
+            <mat-slide-toggle
+                    [(ngModel)]="analyzeInBackend"
+                    class="example-margin"
+                    [color]="color"
+                    [checked]="analyzeInBackend"
+                    class="toggle-filter">
+                    Analyze text in backend!
+            </mat-slide-toggle>
+            <!--
+                Pipe to set first characher to Upper case FirstCharUpperCaseRestLowerPipe 
+            -->
+            <mat-form-field>
+                <mat-label>Analyze type</mat-label>
+                <mat-select [(ngModel)]="analyzeType" name="type">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                            {{ type | firstCharUpperCaseRestLower }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <button mat-raised-button color="primary" (click)="analyzeText()" class="analyze-button">Analyze</button>
+
+            <button mat-raised-button (click)="resetFilters()">Reset filters</button>
+        </div>
+    </mat-card>
+
+    <!--
+        https://stackoverflow.com/questions/58994052/print-key-values-in-angular-8
+
+        how to print key value pairs in angular
+    -->
+    <mat-card class="text-analyze-list"> 
+        <mat-list role="list" *ngIf="listIsNotEmpty">
+            <mat-list-item 
+                *ngFor="let row of listItems | keyvalue; let last = last" 
+                [ngClass]="{'border-bottom': !last}" 
+                role="listitem">
+                {{ row.key }}: {{ row.value }}
+            </mat-list-item>
+        </mat-list>   
+        <div *ngIf="!listIsNotEmpty" class="no-data-text">No data</div>     
+    </mat-card>
+</mat-card>
+
+  
