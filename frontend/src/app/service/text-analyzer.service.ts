@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AnalyzedTextResult } from '../dto/AnalyzedTextResult';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AnalyzeType } from '../enum/AnalyzeType.enum';
 
 @Injectable({
@@ -28,6 +28,20 @@ export class TextAnalyzerService {
     const params = new HttpParams()
       .set('textToAnalyze', text)
       .set('type', type);
-    return this.httpClient.get<AnalyzedTextResult>(this.apiUrl, { params });
+    return this.httpClient.get<AnalyzedTextResult>(this.apiUrl, { params })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage: string;
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = error.error;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

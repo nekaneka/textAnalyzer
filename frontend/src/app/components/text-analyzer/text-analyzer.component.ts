@@ -5,6 +5,7 @@ import { ThemePalette } from '@angular/material/core';
 import { CharacterFrequencies } from '../../dto/AnalyzedTextResult';
 import { TextAnalysisUtil } from '../../util/TextAnalyzer.util';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-text-analyzer',
@@ -28,6 +29,7 @@ export class TextAnalyzerComponent {
 
   // Method to handle text analysis
   analyzeText() {
+    this.snackBar.dismiss();
     this.clearListItems(); // Clear previous results
     if (this.analyzeInBackend) this.analyzeTextInBackend(); // Analyze using backend if flag is true
     else this.analyzeInFrontend(); // Otherwise, analyze on the frontend
@@ -35,6 +37,7 @@ export class TextAnalyzerComponent {
 
   // Method to reset all filters and inputs
   resetFilters() {
+    this.snackBar.dismiss();
     this.clearListItems();
     this.deleteTextToAnalyze();
     this.analyzeType = AnalyzeType.VOWELS;
@@ -46,18 +49,24 @@ export class TextAnalyzerComponent {
     this.listItems = {};
   }
 
-  // Method for backend analysis
   private analyzeTextInBackend() {
-    this.textAnalyzerService.analyzeText(this.textToAnalyze, this.analyzeType).subscribe(
-      (result) => {
+    this.textAnalyzerService.analyzeText(this.textToAnalyze, this.analyzeType).subscribe({
+      next: (result) => {
         this.listItems = result.characterFrequencies; // Update results from backend response
       },
-      (error) => {
-        console.log(error); 
-        this.snackBar.open('Please run backend!', 'close'); // Show error notification
+      error: (errorResponse) => {
+        let errorMessage: string;
+        errorMessage = errorResponse.toString();
+        
+        if (errorMessage === 'Text to analyze must not be empty') {
+          this.snackBar.open(errorMessage, 'Close');
+        } else {
+          this.snackBar.open('Please run backend!', 'Close');
+        }
       }
-    );
+    });
   }
+  
 
   // Method for frontend analysis
   private analyzeInFrontend() {
