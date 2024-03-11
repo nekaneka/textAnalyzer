@@ -66,10 +66,7 @@ These instructions will get you a copy of the project up and running on your loc
   ```bash
   npx playwright test
 
-
-### Features: - ****
-
-```markdown
+## Features
 
 - Text analysis functionality in both frontend (TypeScript) and backend (Java)
 - Toggle switch for online and offline analysis modes
@@ -86,4 +83,5 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Authors
 
-- **Mehremic Adem**
+- Mehremic Adem
+
