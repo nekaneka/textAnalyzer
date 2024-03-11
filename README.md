@@ -51,26 +51,25 @@ These instructions will get you a copy of the project up and running on your loc
   ```bash
   mvn test
 
-#### Frontend Unit Tests:
-    Run the Angular unit tests:
-    ```bash
-    ng test
+- **Frontend Unit Tests:**
+  Run the Angular unit tests:
+  ```bash
+  ng test
 
-#### End-to-End Tests:
-    Ensure that the backend and frontend servers are running. Install Playwright Test if not already installed:
-    ```bash
-    npm i -D @playwright/test
+- **End-to-End Tests:**
+  Ensure that the backend and frontend servers are running. Install Playwright Test if not already installed:
+  ```bash
+  npm i -D @playwright/test
 
-#### Run the end-to-end tests:
-    
-    ```bash
-    npx playwright test
+- **Run the end-to-end tests:**
+  
+  ```bash
+  npx playwright test
 
 
-### Features:
+### Features: - ****
 
 ```markdown
-## Features
 
 - Text analysis functionality in both frontend (TypeScript) and backend (Java)
 - Toggle switch for online and offline analysis modes
