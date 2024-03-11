@@ -2,7 +2,7 @@ import { CharacterFrequencies } from "../dto/AnalyzedTextResult";
 
 export class TextAnalysisUtil {
 
-    // Static properties for vowels, consonants,
+    // Static properties for vowels, consonants, etc..
     public static vowels = "AEIOU";
     public static consonants = "BCDFGHJKLMNPQRSTVWXYZ";
     public static numbers = "0123456789";

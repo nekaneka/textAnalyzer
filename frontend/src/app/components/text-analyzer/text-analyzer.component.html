@@ -1,60 +1,67 @@
+<!-- Text Analyzer Component Template -->
+<!-- This template uses Angular Material components for UI and form controls -->
+
 <mat-card class="text-analyze-wrapper">
+    <!-- Card Header: Displays the title of the component -->
     <mat-card-header class="text-analyze-filter-header">
         <mat-card-title>Text Analyzer</mat-card-title>
     </mat-card-header>
-    <mat-card class="text-analyze-filter-wrapper ">
+
+    <!-- Text Input Area -->
+    <!-- Users can input text here for analysis -->
+    <mat-card class="text-analyze-filter-wrapper">
         <div class="flex-column">
+            <!-- Form field for text input -->
+            <!-- Includes a button to clear the input field -->
             <mat-form-field class="example-full-width">
-                <mat-label>Insert text to analyize</mat-label>
+                <mat-label>Insert text to analyze</mat-label>
                 <textarea matInput [(ngModel)]="textToAnalyze"></textarea>
                 <button *ngIf="textToAnalyze" matSuffix mat-icon-button 
-                    aria-label="Clear" (click)="deleteTextToAnalyze()" class="close-button">
+                        aria-label="Clear" (click)="deleteTextToAnalyze()" class="close-button">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field>
-            
-            <mat-slide-toggle
-                    [(ngModel)]="analyzeInBackend"
-                    class="example-margin"
-                    [color]="color"
-                    [checked]="analyzeInBackend"
-                    class="toggle-filter">
-                    Analyze text in backend!
+
+            <!-- Toggle switch for backend analysis -->
+            <!-- Lets the user choose if analysis should be done in backend -->
+            <mat-slide-toggle [(ngModel)]="analyzeInBackend" class="example-margin toggle-filter"
+                              [color]="color" [checked]="analyzeInBackend">
+                Analyze text in backend!
             </mat-slide-toggle>
-            <!--
-                Pipe to set first characher to Upper case FirstCharUpperCaseRestLowerPipe 
-            -->
+
+            <!-- Dropdown for selecting analysis type -->
+            <!-- Applies a custom pipe for formatting the options -->
             <mat-form-field>
                 <mat-label>Analyze type</mat-label>
                 <mat-select [(ngModel)]="analyzeType" name="type">
                     <mat-option *ngFor="let type of types" [value]="type">
-                            {{ type | firstCharUpperCaseRestLower }}
+                        {{ type | firstCharUpperCaseRestLower }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-    
-            <button mat-raised-button color="primary" (click)="analyzeText()" class="analyze-button">Analyze</button>
 
+            <!-- Button to initiate text analysis -->
+            <button mat-raised-button color="primary" (click)="analyzeText()" class="analyze-button">
+                Analyze
+            </button>
+
+            <!-- Button to reset all filters and inputs -->
             <button mat-raised-button (click)="resetFilters()">Reset filters</button>
         </div>
     </mat-card>
 
-    <!--
-        https://stackoverflow.com/questions/58994052/print-key-values-in-angular-8
-
-        how to print key value pairs in angular
-    -->
+    <!-- Results Display Section -->
+    <!-- Conditionally rendered based on whether there are items to display -->
     <mat-card class="text-analyze-list"> 
+        <!-- List of key-value pairs resulting from the analysis -->
         <mat-list role="list" *ngIf="listIsNotEmpty">
-            <mat-list-item 
-                *ngFor="let row of listItems | keyvalue; let last = last" 
-                [ngClass]="{'border-bottom': !last}" 
-                role="listitem">
+            <mat-list-item *ngFor="let row of listItems | keyvalue; let last = last" 
+                           [ngClass]="{'border-bottom': !last}" role="listitem">
                 {{ row.key }}: {{ row.value }}
             </mat-list-item>
-        </mat-list>   
+        </mat-list>
+
+        <!-- Displayed when there are no results -->
         <div *ngIf="!listIsNotEmpty" class="no-data-text">No data</div>     
     </mat-card>
 </mat-card>
-
-  

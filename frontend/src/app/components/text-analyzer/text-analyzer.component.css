@@ -4,6 +4,9 @@
 
 
 .text-analyze-wrapper {
+   
+    width: 50%;
+    margin: 0 auto;
     min-height: 100%; 
     padding: 20px;
 }

@@ -9,7 +9,7 @@ import { AnalyzeType } from '../enum/AnalyzeType.enum';
 })
 export class TextAnalyzerService {
 
-  private readonly apiUrl = 'http://localhost:8080/api/analyze'; 
+  public readonly apiUrl = 'http://localhost:8080/api/analyze'; 
 
   constructor(
     private httpClient: HttpClient
