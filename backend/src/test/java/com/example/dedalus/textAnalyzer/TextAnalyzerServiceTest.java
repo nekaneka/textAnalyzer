@@ -30,8 +30,11 @@ public class TextAnalyzerServiceTest {
 
         assertNotNull(responseDto);
         assertEquals(AnalysisType.VOWELS, responseDto.getType());
+        
+        // 'hello' is analyzed as 'HELLO'
         Map<Character, Integer> frequencies = responseDto.getCharacterFrequencies();
-        assertEquals(1, frequencies.get('E')); // Assuming 'hello' is analyzed as 'HELLO'
+        assertEquals(1, frequencies.get('E')); 
+        assertEquals(1, frequencies.get('O')); 
     }
 
     @Test

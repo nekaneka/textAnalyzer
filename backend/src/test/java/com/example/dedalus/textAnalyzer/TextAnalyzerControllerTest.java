@@ -127,7 +127,7 @@ public class TextAnalyzerControllerTest {
 
     @Test
     public void testAnalyzeEndpoint_IncorrectHttpMethod() throws Exception {
-        mockMvc.perform(post("/api/analyze") // Using POST here for a GET endpoint
+        mockMvc.perform(post("/api/analyze") 
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
     }
